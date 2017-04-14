@@ -10,5 +10,15 @@
   <%= @rental.end_date %>
 </p>
 
+<p>
+  <strong>Cost:</strong>
+  <%= @rental.cost %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @rental.description %>
+</p>
+
 <%= link_to 'Edit', edit_rental_path(@rental) %> |
 <%= link_to 'Back', rentals_path %>

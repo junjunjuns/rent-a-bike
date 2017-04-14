@@ -1,4 +1,5 @@
 class RentalsController < ApplicationController
+  require 'bike_decorator'
   before_action :set_rental, only: [:show, :edit, :update, :destroy]
 
   # GET /rentals
@@ -25,7 +26,52 @@ class RentalsController < ApplicationController
   # POST /rentals.json
   def create
     @rental = Rental.new(rental_params)
+    
+    #@bike.name = params[:bike][:name]
+    #@bike.color = params[:bike][:color]
+    #@bike.manufacturer = params[:bike][:manufacturer]
+    
+    myBike = BasicBike.new("blue")
+    
+    if params[:bike][:bag].to_s.length > 0 then
+      myBike = SaddleBagDecorator.new(myBike)
+    end
 
+    if params[:bike][:stabiliser].to_s.length > 0 then
+      myBike = StabiliserDecorator.new(myBike)
+    end
+
+    if params[:bike][:buggy].to_s.length > 0 then
+      myBike = ChildBuggyDecorator.new(myBike)
+    end
+
+    if params[:bike][:seat].to_s.length > 0 then
+      myBike = ChildSeatDecorator.new(myBike)
+    end
+  
+    if params[:bike][:waterBag].to_s.length > 0 then
+      myBike = WaterResistantBagDecorator.new(myBike)
+    end
+
+    if params[:bike][:eyeMirror].to_s.length > 0 then
+      myBike = EyeMirrorDecorator.new(myBike)
+    end
+
+    if params[:bike][:bell].to_s.length > 0 then
+      myBike = BellDecorator.new(myBike)
+    end
+
+    if params[:bike][:endMirror].to_s.length > 0 then
+      myBike = EndMirrorDecorator.new(myBike)
+    end
+
+    if params[:bike][:horn].to_s.length > 0 then
+      myBike = HornDecorator.new(myBike)
+    end
+    
+    @rental.cost = myBike.cost
+    @rental.description = myBike.details
+    
     respond_to do |format|
       if @rental.save
         format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
