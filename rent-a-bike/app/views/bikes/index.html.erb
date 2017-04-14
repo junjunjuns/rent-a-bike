@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
       <th>Manufacturer</th>
       <th>Color</th>
       <th>Price</th>
@@ -20,15 +19,16 @@
     <% @bikes.each do |bike| %>
       <tr>
         <td><%= bike.name %></td>
-        <td><%= bike.type %></td>
         <td><%= bike.manufacturer %></td>
         <td><%= bike.color %></td>
         <td><%= bike.price %></td>
         <td><%= bike.description %></td>
         <td><%= bike.image %></td>
         <td><%= link_to 'Show', bike %></td>
+        <% if current_user.admin? %>
         <td><%= link_to 'Edit', edit_bike_path(bike) %></td>
         <td><%= link_to 'Destroy', bike, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +36,6 @@
 
 <br>
 
+<% if current_user.admin? %>
 <%= link_to 'New Bike', new_bike_path %>
+<% end %>
