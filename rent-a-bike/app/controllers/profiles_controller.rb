@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -85,6 +86,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:fname, :lname, :age, :email, :phone, :profile_picture)
+      params.require(:profile).permit(:fname, :lname, :age, :email, :phone, :profile_picture, :user_id)
     end
 end

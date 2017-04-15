@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414022742) do
+ActiveRecord::Schema.define(version: 20170415021133) do
 
   create_table "bikes", force: :cascade do |t|
     t.string   "name"
@@ -33,7 +33,10 @@ ActiveRecord::Schema.define(version: 20170414022742) do
     t.string   "profile_picture"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "user_id"
   end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "rentals", force: :cascade do |t|
     t.date     "start_date"
@@ -42,14 +45,24 @@ ActiveRecord::Schema.define(version: 20170414022742) do
     t.datetime "updated_at",  null: false
     t.decimal  "cost"
     t.string   "description"
+    t.integer  "profile_id"
+    t.integer  "bike_id"
   end
+
+  add_index "rentals", ["bike_id"], name: "index_rentals_on_bike_id"
+  add_index "rentals", ["profile_id"], name: "index_rentals_on_profile_id"
 
   create_table "reviews", force: :cascade do |t|
     t.string   "feedback"
     t.decimal  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "bike_id"
+    t.integer  "profile_id"
   end
+
+  add_index "reviews", ["bike_id"], name: "index_reviews_on_bike_id"
+  add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

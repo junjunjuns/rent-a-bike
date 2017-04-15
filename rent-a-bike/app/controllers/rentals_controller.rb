@@ -16,6 +16,7 @@ class RentalsController < ApplicationController
   # GET /rentals/new
   def new
     @rental = Rental.new
+    @bike = Bike.all
   end
 
   # GET /rentals/1/edit
@@ -115,6 +116,6 @@ class RentalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rental_params
-      params.require(:rental).permit(:start_date, :end_date)
+      params.require(:rental).permit(:start_date, :end_date, :cost, :description, :bike_id, :profile_id)
     end
 end

@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Profile</th>
+      <th>Bike</th>
       <th>Start date</th>
       <th>End date</th>
       <th>Cost</th>
@@ -16,6 +18,8 @@
   <tbody>
     <% @rentals.each do |rental| %>
       <tr>
+        <td><%= rental.profile_id %></td>
+        <td><%= rental.bike_id %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
         <td><%= rental.cost %></td>
