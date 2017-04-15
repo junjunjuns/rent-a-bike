@@ -1,5 +1,6 @@
 class RentalsController < ApplicationController
   require 'bike_decorator'
+  require 'rental_calculator'
   before_action :set_rental, only: [:show, :edit, :update, :destroy]
 
   # GET /rentals
@@ -22,6 +23,7 @@ class RentalsController < ApplicationController
 
   # GET /rentals/1/edit
   def edit
+  
   end
 
   # POST /rentals
@@ -34,6 +36,7 @@ class RentalsController < ApplicationController
     #@bike.manufacturer = params[:bike][:manufacturer]
     
     myBike = BasicBike.new("blue")
+    myCalculator = RentalCalculator.new(@rental.start_date, @rental.end_date)
     
     if params[:bike][:bag].to_s.length > 0 then
       myBike = SaddleBagDecorator.new(myBike)
@@ -71,7 +74,7 @@ class RentalsController < ApplicationController
       myBike = HornDecorator.new(myBike)
     end
     
-    @rental.cost = myBike.cost
+    @rental.cost = myBike.cost + myCalculator.calculate
     @rental.description = myBike.details
     
     respond_to do |format|
