@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RentABike</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="login">
+    <% if user_signed_in? %>
+      <ul>
+        <li>Signed in as <%= current_user.email %></li>
+        <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+        <li><%= link_to 'Register', new_user_registration_path %></li>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+      </ul>
+    <% end %>
+    <p class="notice"><%= flash[:notice] %></p>
+    <p class="alert"><%= flash[:alert] %></p>
+  </div>
+
+  <nav id="myNav" class="nav">
+		<ul>
+			<li><a href="/bikes">Bikes</a></li>
+			<% if user_signed_in? && current_user.admin? %>
+			  <li><a href="/profiles">Profiles</a></li>
+			  <li><a href="/rentals">Rentals</a></li>
+			<% else %>
+			  <li><a href="/signedinuserprofile" >Profile</a></li>
+			  <li><a href="/profiles/#{@profile.id}/rentals">Rentals</a></li>		
+			<% end %> 
+			<li><a href="/reviews">Reviews</a></li>
+		</ul>
+	</nav>
+	
+  <div class="search">
+    <% if user_signed_in? %>
+      <%= form_tag(bikes_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Bikes" %>
+        <%= submit_tag "Search" %>
+      <% end %>
+      <% if @bikes.present? %>
+      <% else %>
+        <p>There are no bikes containing the term(s) <%= params[:search] %></p>
+      <% end %>
+    <% end %>
+  </div>	
+<%= yield %>
+
+</body>
+</html>
