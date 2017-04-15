@@ -16,7 +16,8 @@ class RentalsController < ApplicationController
   # GET /rentals/new
   def new
     @rental = Rental.new
-    @bike = Bike.all
+    @rental.profile_id = current_user.id
+    
   end
 
   # GET /rentals/1/edit

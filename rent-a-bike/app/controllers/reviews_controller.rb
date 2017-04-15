@@ -15,6 +15,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    @review.profile_id = current_user.id
   end
 
   # GET /reviews/1/edit
