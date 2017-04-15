@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :rentals
   
   get 'signedinuserprofile' => 'profiles#signedinuserprofile'
+  get 'allreviews' => 'reviews#allreviews'
+  get 'allrentals' => 'rentals#allrentals'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
