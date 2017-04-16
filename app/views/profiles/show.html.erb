@@ -1,16 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Fname:</strong>
-  <%= @profile.fname %>
-</p>
+<div class="leftTable">
+  <%= @profile.profile_picture %><br>
+  <%= @profile.fname + " " + @profile.lname %>
+</div>
 
-<p>
-  <strong>Lname:</strong>
-  <%= @profile.lname %>
-</p>
-
-<p>
+<div class="rightTable">
+  <p>
   <strong>Age:</strong>
   <%= @profile.age %>
 </p>
@@ -24,16 +20,7 @@
   <strong>Phone:</strong>
   <%= @profile.phone %>
 </p>
-
-<p>
-  <strong>Profile picture:</strong>
-  <%= @profile.profile_picture %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
-</p>
+</div>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Home', bikes_path %> |

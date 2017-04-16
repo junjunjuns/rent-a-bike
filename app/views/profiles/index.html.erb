@@ -5,30 +5,24 @@
 <table>
   <thead>
     <tr>
-      <th>Fname</th>
-      <th>Lname</th>
-      <th>Age</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Profile picture</th>
+      <th>ID#</th>
       <th>User</th>
-      <th colspan="3"></th>
+      <th>Details</th>
     </tr>
   </thead>
 
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
-        <td><%= profile.fname %></td>
-        <td><%= profile.lname %></td>
-        <td><%= profile.age %></td>
-        <td><%= profile.email %></td>
-        <td><%= profile.phone %></td>
-        <td><%= profile.profile_picture %></td>
         <td><%= profile.user_id %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+        <td><%= link_to profile.profile_picture, profile %><br>
+            <%= link_to profile.fname + " " + profile.lname, profile %></td>
+        <td>Age: <%= profile.age %><br>
+            Email: <%= profile.email %><br>
+            Phone: <%= profile.phone %></td>
+        <% if current_user.admin? %>
         <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +30,6 @@
 
 <br>
 
+<% if current_user.admin? %>
 <%= link_to 'New Profile', new_profile_path %>
+<% end %>

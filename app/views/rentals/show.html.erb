@@ -3,11 +3,6 @@
 <h1>Rental made by <%= @profile.fname + " " + @profile.lname %></h1>
 
 <p>
-  <strong>Profile:</strong>
-  <%= @profile.fname + " " + @profile.lname %>
-</p>
-
-<p>
   <strong>Bike:</strong>
   <% @bike = Bike.find(@rental.bike_id) %>
   <%= @bike.name %>

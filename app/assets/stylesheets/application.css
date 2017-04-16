@@ -190,10 +190,6 @@ a:hover{
 a:visited{
 	text-decoration: none;
 }
-img{
-	height: 50%;
-	width: 25%;
-}
 
 h1, h2, h3, h4{
 	font-family: 'Bungee', cursive, Verdana, Tahoma, Arial, serif, sans-serif;
@@ -213,22 +209,76 @@ li{
 /* main to the left, rightRental to the left on every page */
 .main{
 	display: block;
-	width: 60%;
+	width: 65%;
 	height: auto;
 	margin: 1%;
 	float: left;
 }
 .rightRental{
 	display: block;
-	width: 30%;
+	width: 25%;
 	height: auto;
 	margin: 1%;
 	float: right;
 	background-color: #C1D9F0;
 	border: 5px solid #8495A5;
-	padding: 2%;
+	padding: 1%;
 }
 
 .search{
 	float: right;
+}
+
+.field{
+	margin: 1%;
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	font-size: 100%;
+	color: #3F4449;
+}
+
+.actions{
+	margin: 2%;
+	padding: 1%;
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	font-size: 80%;
+}
+
+.field p{
+	font-size: 80%;
+}
+
+table{
+	width: 100%;
+	margin: 5% auto;
+	border: 3px solid #636E93;
+	overflow: hidden;
+}
+table th{
+	font-family: 'Bungee', cursive, Verdana, Tahoma, Arial, serif, sans-serif;
+	text-align: center;
+	background: #B6C5F5;
+	font-size: 150%;
+}
+
+table td{
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	text-align: left;
+	font-size: 100%;
+	background: #D3DCF7;
+	overflow: hidden;
+}
+
+.leftTable{
+	display: block;
+	width: 25%;
+	height: auto;
+	margin: 1%;
+	float: left;	
+}
+.rightTable{
+	display: block;
+	width: 70%;
+	height: auto;
+	margin: 1%;
+	float: left;
 }

@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @bike.name %>
-</p>
+<div class="leftTable">
+  <%= @bike.name %> <br>
+  <%= @bike.image %>
+</div>
 
-<p>
+<div class="rightTable">
+  <p>
   <strong>Manufacturer:</strong>
   <%= @bike.manufacturer %>
 </p>
@@ -16,7 +17,7 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>Rental/day:</strong>
   <%= @bike.price %>
 </p>
 
@@ -25,11 +26,9 @@
   <%= @bike.description %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @bike.image %>
-</p>
+</div>
 
+<div class="clearfix"></div>
 <%= link_to 'Edit', edit_bike_path(@bike) %> |
 <%= link_to 'Back', bikes_path %> |
 <%= link_to 'Reviews', bike_reviews_path(@bike) %>
