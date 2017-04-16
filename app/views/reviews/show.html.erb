@@ -1,15 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Profile:</strong>
-  <%= @review.profile_id %>
-</p>
-
-<p>
-  <strong>Bike:</strong>
-  <%= @review.bike_id %>
-</p>
-
+<h1>Review of <%= @bike.name %> by user <%= @review.profile_id %></h1>
 <p>
   <strong>Feedback:</strong>
   <%= @review.feedback %>
@@ -20,5 +11,5 @@
   <%= @review.rating %>
 </p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %>
+<%= link_to 'Edit', edit_bike_review_path(@bike, @review) %> |
+<%= link_to 'Back', bike_reviews_path(@bike) %>

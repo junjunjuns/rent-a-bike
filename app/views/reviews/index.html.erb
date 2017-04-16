@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Reviews</h1>
+<h1>Reviews of <%= @bike.name %></h1>
 
 <table>
   <thead>
@@ -20,10 +20,10 @@
         <td><%= review.bike_id %></td>
         <td><%= review.feedback %></td>
         <td><%= review.rating %></td>
-        <td><%= link_to 'Show', review %></td>
+        <td><%= link_to 'Show', bike_review_path(@bike, review) %></td>
         <% if current_user.admin? %>
-          <td><%= link_to 'Edit', edit_review_path(review) %></td>
-          <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_bike_review_path(@bike, review) %></td>
+          <td><%= link_to 'Destroy', bike_review_path(@bike, review), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
@@ -32,4 +32,5 @@
 
 <br>
 
-<%= link_to 'New Review', new_review_path %>
+<%= link_to 'New Review', new_bike_review_path(@bike) %>
+<%= link_to 'Back', @bike %>

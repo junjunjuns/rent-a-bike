@@ -2,12 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :bikes do
-    resources :rentals
     resources :reviews
   end
 
   resources :profiles do
-    resources :reviews
     resources :rentals
   end
 

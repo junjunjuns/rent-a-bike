@@ -1,64 +1,64 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
-  # GET /reviews
-  # GET /reviews.json
+  # GET  /bikes/:bike_id/reviews
   def index
-    @reviews = Review.all
+    @bike = Bike.find(params[:bike_id])
+    @reviews = @bike.review
   end
 
-  # GET /reviews/1
-  # GET /reviews/1.json
+  # GET  /bikes/:bike_id/reviews/:id
   def show
+    @bike = Bike.find(params[:bike_id])
+    @review = @bike.review.find(params[:id])
   end
 
-  # GET /reviews/new
+  # GET  /bikes/:bike_id/reviews/new
   def new
-    @review = Review.new
+    @bike = Bike.find(params[:bike_id])
+    @review = @bike.review.build
     @review.profile_id = current_user.id
   end
 
-  # GET /reviews/1/edit
+  # GET /bikes/:bike_id/reviews/:id/edit
   def edit
+    @bike = Bike.find(params[:bike_id])
+    @review = @bike.review.find(params[:id])
   end
 
-  # POST /reviews
-  # POST /reviews.json
+  # POST /bikes/:bike_id/reviews
   def create
-    @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    @bike = Bike.find(params[:review][:bike_id])
+    @review = @bike.review.build(params.require(:review).permit!)
+    #@review = @bike.review.build(params.require(:review).permit(:profile_id, :feedback, :rating))
+    
+    if @review.save
+      redirect_to bike_review_url(@bike, @review)
+    else
+      render :action => "new"
     end
   end
 
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
+  # PATCH/PUT  /bikes/:bike_id/reviews/:id
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    @bike = Bike.find(params[:review][:bike_id])
+    @review = Review.find(params[:id])
+    if @review.update_attributes(params.require(:review).permit!)
+      redirect_to bike_review_url(@bike, @review)
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
+  # DELETE  /bikes/:bike_id/reviews/:id
   def destroy
+    @bike = Bike.find(params[:bike_id])
+    @review = Review.find(params[:id])
     @review.destroy
+    
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to bike_reviews_path(@bike) }
+      format.xml { head :ok }
     end
   end
   
