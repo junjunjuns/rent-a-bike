@@ -1,4 +1,4 @@
-class SetAdmin < ActiveRecord::Migration
+class AdminUser < ActiveRecord::Migration
   def change
     @u = User.find_by(email: 'admin@rab.com')
     #if there is no user with the email admin@rab.com

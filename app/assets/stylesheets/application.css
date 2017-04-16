@@ -1,19 +1,18 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+html{
+	background: url(background.jpg) 
+	#415160 /*dark-blue hex value color is set for browsers that cannot load the image*/ 
+	no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+}
 
+body{
+	margin:0;
+	width: 100%;
+}
+
+/*the bar at the top of the page --- for login, register and date*/
 .login{
 	background-color: #90B0CD;
 	width: 100%;
@@ -26,14 +25,203 @@
 .login ul li{
 	float: right;
 	width: 10%;
-}
-.login ul li a{
-	display: block;
 	text-align: center;
+	display: block;
 	text-decoration: none;
-	padding: 5% 2%;
-	font-size: 90%;
+	padding: 1% 0%;
+	font-size: 80%;
 }
+
 .login ul li a:hover{
 	color: #C657B0;
+}
+
+/*navigation bar styles*/
+nav{
+	background-color: #8495A5;
+	border: 10px solid #C1D9F0;
+}
+nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+nav ul li{
+	float: left;
+	position: relative;
+	width: 20%;
+	transition: 0.3s;
+}			
+nav ul li a{
+	display: block;
+	padding: 2% 18%;
+	text-decoration: none;
+	text-align: center;
+	font-family: 'Bungee', cursive;
+	font-size: 120%;
+	overflow: hidden;
+}
+
+/*nav ul li:hover{
+*	background: #C1D9F0;
+*}
+*/
+
+/*section is divided into 4 parts*/	
+.section{
+	width: 22.5%;
+	float: left;
+	text-align: justify;
+	margin: 1%;
+}
+.section img{
+	display: block;
+	margin: 0 auto;
+}
+
+/*clearfix for use after floats to ensure the following elements are not affected*/	
+.clearfix{
+	clear: both;
+}
+
+#wrapper{
+	margin: 0 1%;
+	padding: 2%;
+	/* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(226, 239, 250);
+    /* RGBa with 0.8 opacity */
+    background: rgba(226, 239, 250, 0.8);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	overflow: hidden;
+}
+
+/*the header of the page*/
+header{
+	/* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(65, 81, 96);
+    /* RGBa with 0.6 opacity */
+    background: rgba(65, 81, 96, 0.6);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	padding: 0;
+	margin: 0 1%;
+	overflow: hidden;
+}
+header img{
+	/*Make image into block to center it
+	https://www.w3.org/Style/Examples/007/center.en.html#block*/
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	height: auto;
+	width: 50%;
+	overflow: hidden;
+}
+
+/*footer styles*/
+footer{
+	/* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(65, 81, 96);
+    /* RGBa with 0.6 opacity */
+    background: rgba(65, 81, 96, 0.6);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	width: 98%;
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+}
+footer h3{
+	font-size: 120%;
+	color: #ABBDCE;
+	min-height: 30%;
+	text-align: center;
+}
+footer p, a{
+	font-size: 80%;
+	color: #D9E4EE;
+	text-align: center;
+}
+footer a:hover{
+	color: #C657B0;
+	text-decoration: none;
+}
+footer ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-align: center;
+}
+footer ul li{
+	float: left;
+	margin: 0;
+	padding: 0;
+	max-width: 25%;
+}
+footer ul li img{
+	display: block;
+	position: center;
+	width: 80%;
+	height: auto;
+}
+
+/*end of the page disclaimer*/
+.disclaimer{
+	background-color: #90B0CD;
+	text-align: center;
+	padding: 1%;
+	margin: 0;
+	font-size: 90%;
+}
+
+/*general styles for a, img, p, li and h*/
+a{
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	font-size: 125%;
+	color: #3F4449;	
+	text-decoration: none;
+}
+a:hover{
+	color: #C657B0;
+}
+a:visited{
+	text-decoration: none;
+}
+img{
+	height: 50%;
+	width: 25%;
+}
+
+h1, h2, h3, h4{
+	font-family: 'Bungee', cursive, Verdana, Tahoma, Arial, serif, sans-serif;
+	text-align: center;
+}
+
+p{
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	font-size: 125%;
+	color: #3F4449;
+}
+
+li{
+	font-family: 'Libre Baskerville', Verdana, Tahoma, Arial, serif, sans-serif;
+	color: #3F4449;}
+
+/* main to the left, rightRental to the left on every page */
+.main{
+	display: block;
+	width: 60%;
+	height: auto;
+	padding: 1%;
+	float: left;
+}
+.rightRental{
+	display: block;
+	width: 40%;
+	height: auto;
+	padding: 1%;
+	float: right;
 }

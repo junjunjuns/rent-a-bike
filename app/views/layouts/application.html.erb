@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>RentABike</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
 </head>
 <body>
 
   <div class="login">
     <% if user_signed_in? %>
       <ul>
-        <li>Signed in as <%= current_user.email %></li>
         <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+        <% @profile = Profile.find(current_user.id) %>
+        <% if @profile.present? && @profile.fname.present? && @profile.lname.present? %>
+          <li>Signed in as <%= (@profile.fname + " " + @profile.lname) %></li>
+        <% else %>
+          <li>Signed in as <%= current_user.id %></li>
+        <% end %>
     <% else %>
         <li><%= link_to 'Register', new_user_registration_path %></li>
         <li><%= link_to 'Sign In', new_user_session_path %></li>
@@ -22,7 +38,11 @@
     <p class="alert"><%= flash[:alert] %></p>
   </div>
 
-  <nav id="myNav" class="nav">
+	<div class="clearfix"></div>
+
+<header>
+		<p><a href="/bikes"><img src="image/title.png" alt="title" title="RentABike"/></a></p>
+		  <nav id="myNav" class="nav">
 		<ul>
 			<li><a href="/bikes">Bikes</a></li>
 			<% if user_signed_in? %>
@@ -35,10 +55,12 @@
   			  <li><%= link_to 'Rentals', profile_rentals_path(@profile) %></li>
 			  <% end %> 
 			<% end %>
-			  
 			<li><a href="/allreviews">Reviews</a></li>
 		</ul>
 	</nav>
+
+</header>
+<div id="wrapper">
 	<div class="search">
     <% if user_signed_in? %>
       <%= form_tag(bikes_path, :method => "get", id: "search-form") do %>
@@ -47,7 +69,43 @@
       <% end %>
     <% end %>
   </div>
-<%= yield %>
-
+  <div class="main">
+  <%= yield %>
+  </div>
+  <div class="rightRental">
+    
+  </div>
+</div>
+		<footer>
+			<div class="section">
+				<h3>Talk to us!</h3>
+				<p>+000 12 345 6789<br/>
+				99, Bike Renting Street,<br/>
+				Bike Rentals Avenue, Dublin.</p>
+			</div>
+			<div class="section">
+				<!--From How To Make A Website From Scratch - HTML5/CSS3 Responsive Design Youtube tutorial(Ryan, 2014)-->
+				<h3> Connect with us!</h3>
+				<ul>
+					<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/facebook1.png" alt="facebook"/></a></li>
+					<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/googleplus.png" alt="googleplus"/></a></li>
+					<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/twitter1.png" alt="twitter"/></a></li>
+					<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/youtube1.png" alt="youtube"/></a></li>
+				</ul>
+			</div>
+			<div class="section">
+				<h3>Bikes</h3>
+				<p>We We have a wide range of bikes! We make sure nobody is left out!<br/>
+				Please check out our <a href="/bikes">bikes</a> page for more information.</p>
+			</div>
+			<div class="section">
+				<h3>Reviews</h3>
+				<p>Check out the reviews left by previous customers before deciding which bike to rent!<br/>
+				Please check out our <a href=/allreviews"">reviews</a> page for more information.</p>
+			</div>
+		</footer>
+		
+		<div class="clearfix"></div>
+		<p class="disclaimer">If you have not noticed, nothing on this site is real. This is a college project, purely for academic purposes only.</p>
 </body>
 </html>
