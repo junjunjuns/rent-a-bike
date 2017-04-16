@@ -17,7 +17,7 @@
     <% @reviews.each do |review| %>
       <tr>
         <td><%= review.profile_id %></td>
-        <td><%= review.bike_id %></td>
+        <td><%= @bike.name %></td>
         <td><%= review.feedback %></td>
         <td><%= review.rating %></td>
         <td><%= link_to 'Show', bike_review_path(@bike, review) %></td>
