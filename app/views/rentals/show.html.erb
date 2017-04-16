@@ -7,8 +7,8 @@
 
 <p>
   <strong>Bike:</strong>
-  <%= @rental.bike_id %>
-</p>
+  <% @bike = Bike.find(@rental.bike_id) %>
+  <%= @bike.name %>
 
 <p>
   <strong>Start date:</strong>

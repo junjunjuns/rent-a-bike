@@ -16,7 +16,8 @@
   <tbody>
     <% @reviews.each do |review| %>
       <tr>
-        <td><%= review.profile_id %></td>
+        <% @profile = Profile.find(review.profile_id) %>
+        <td><%= @profile.fname + " " + @profile.lname %></td>
         <td><%= @bike.name %></td>
         <td><%= review.feedback %></td>
         <td><%= review.rating %></td>

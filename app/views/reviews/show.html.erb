@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Review of <%= @bike.name %> by user <%= @review.profile_id %></h1>
+<% @profile = Profile.find(@review.profile_id) %>
+<h1>Review of <%= @bike.name %> by <%= @profile.fname + " " + @profile.lname %></h1>
 <p>
   <strong>Feedback:</strong>
   <%= @review.feedback %>

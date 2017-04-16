@@ -19,7 +19,8 @@
     <% @rentals.each do |rental| %>
       <tr>
         <td><%= rental.profile_id %></td>
-        <td><%= rental.bike_id %></td>
+        <% @bike = Bike.find(rental.bike_id) %>
+        <td><%= @bike.name %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
         <td><%= rental.cost %></td>

@@ -18,13 +18,25 @@
   <tbody>
     <% @rentals.each do |rental| %>
       <tr>
-        <td><%= rental.profile_id %></td>
-        <td><%= rental.bike_id %></td>
+        <% @profile = Profile.find(rental.profile_id) %>
+        <td><%= @profile.fname + " " + @profile.lname %></td>
+        <% @bike = Bike.find(rental.bike_id) %>
+        <td><%= @bike.name %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
         <td><%= rental.cost %></td>
         <td><%= rental.description %></td>
+        <td><%= link_to 'Show', "/profiles/#{rental.profile_id}/rentals/#{rental.id}" %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', "/profiles/#{rental.profile_id}/rentals/#{rental.id}/edit" %></td>
+          <td><%= link_to 'Destroy', "/profiles/#{rental.profile_id}/rentals/#{rental.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br>
+<% @rentals.each do |rental| %>
+<%= link_to 'New Rental', "/profiles/#{rental.profile_id}/rentals/new" %>
+<% end %>

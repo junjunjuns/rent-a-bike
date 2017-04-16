@@ -16,11 +16,23 @@
   <tbody>
     <% @reviews.each do |review| %>
       <tr>
-        <td><%= review.profile_id %></td>
-        <td><%= link_to "#{review.bike_id}", "/bikes/#{review.bike_id}" %></td>
+        <% @profile = Profile.find(review.profile_id) %>
+        <td><%= @profile.fname + " " + @profile.lname %></td>
+        <% @bike = Bike.find(review.bike_id) %>
+        <td><%= @bike.name %></td>
         <td><%= review.feedback %></td>
         <td><%= review.rating %></td>
+        <td><%= link_to 'Show', "/bikes/#{review.bike_id}/reviews/#{review.id}" %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', "bikes/#{review.bike_id}/reviews/#{review.id}/edit" %></td>
+          <td><%= link_to 'Destroy', "bikes/#{review.bike_id}/reviews/#{review.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br>
+<% @reviews.each do |review| %>
+<%= link_to 'New Review', "/bikes/#{review.bike_id}/reviews/new" %>
+<% end %>
