@@ -6,9 +6,13 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :age
       t.string :email
       t.string :phone
-      t.string :profile_picture
 
       t.timestamps null: false
+      
+      add_attachment :profiles, :avatar
+      
+      add_reference :profiles, :user, index: true
+      add_foreign_key :profiles, :users
     end
   end
 end
