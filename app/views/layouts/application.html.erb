@@ -31,6 +31,7 @@
   			  <li><a href="/allrentals">Rentals</a></li>
   			<% else %>
   			  <li><a href="/signedinuserprofile" >Profile</a></li>
+  			  <% @profile = current_user.id %>
   			  <li><%= link_to 'Rentals', profile_rentals_path(@profile) %></li>
 			  <% end %> 
 			<% end %>
