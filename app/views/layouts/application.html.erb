@@ -76,7 +76,7 @@
     <h2>Make a Rental</h2>
 	   <% if user_signed_in? %> 
 	    <% if Profile.exists?(id: current_user.id) %>
-		    <% @profile = Profile.find((current_user.id)+1) %>
+		    <% @profile = Profile.find(current_user.id) %>
 		    <% @rental = @profile.rental.build %>
 		    <% @rental.profile_id = @profile.id %>
 		    <%= render :template => '/rentals/_form' %>
