@@ -23,11 +23,10 @@
     <% if user_signed_in? %>
       <ul>
         <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-        <% @profile = Profile.find(current_user.id) %>
         <% if @profile.present? && @profile.fname.present? && @profile.lname.present? %>
           <li>Signed in as <%= (@profile.fname + " " + @profile.lname) %></li>
         <% else %>
-          <li>Signed in as <%= current_user.id %></li>
+          <li>Signed in as new user</li>
         <% end %>
     <% else %>
         <li><%= link_to 'Register', new_user_registration_path %></li>
@@ -75,10 +74,14 @@
   </div>
   <div class="rightRental">
     <h2>Make a Rental</h2>
-    <% @profile = Profile.find(current_user.id) %>
-    <% @rental = @profile.rental.build %>
-    <% @rental.profile_id = @profile.id %>
-    <%= render :template => '/rentals/_form' %>
+    <% if @profile.blank? %>
+    	<% @profile = Profile.find(current_user.id) %>
+	    <% @rental = @profile.rental.build %>
+	    <% @rental.profile_id = @profile.id %>
+	    <%= render :template => '/rentals/_form' %>
+	   <% else %>
+	   	<p> Please create a profile first! </p>
+	   <% end %>
   </div>
 </div>
 		<footer>
