@@ -5,6 +5,11 @@ class CreateReviews < ActiveRecord::Migration
       t.decimal :rating
 
       t.timestamps null: false
+      
+      add_reference :reviews, :bike, index: true
+      add_foreign_key :reviews, :bikes
+      add_reference :reviews, :profile, index: true
+      add_foreign_key :reviews, :profiles
     end
   end
 end
