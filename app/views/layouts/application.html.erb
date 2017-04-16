@@ -39,19 +39,14 @@
 			<li><a href="/allreviews">Reviews</a></li>
 		</ul>
 	</nav>
-	
-  <div class="search">
+	<div class="search">
     <% if user_signed_in? %>
       <%= form_tag(bikes_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search Bikes" %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search" %>
         <%= submit_tag "Search" %>
       <% end %>
-      <% if @bikes.present? %>
-      <% else %>
-        <p>There are no bikes containing the term(s) <%= params[:search] %></p>
-      <% end %>
     <% end %>
-  </div>	
+  </div>
 <%= yield %>
 
 </body>

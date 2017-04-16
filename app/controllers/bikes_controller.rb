@@ -7,10 +7,10 @@ class BikesController < ApplicationController
   # GET /bikes.json
   def index
     @bikes = Bike.all
-    if params[:search]
-      @bikes = Bike.search(params[:search]).order("created_at DESC")
+    if (params[:search] && @bikes.present?)
+      @bikes = Bike.search(params[:search]).order("id ASC")
     else
-      @bikes = Bike.all.order('created_at DESC')
+      @bikes = Bike.all.order('name ASC')
     end
   end
 
