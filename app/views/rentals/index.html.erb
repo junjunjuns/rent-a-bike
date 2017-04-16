@@ -19,7 +19,8 @@
       <tr>
         <td><%= rental.id %></td>
         <% @bike = Bike.find(rental.bike_id) %>
-        <td><%= @bike.name %></td>
+        <td><%= image_tag(@bike.image.url(:thumb)) %> <br>
+            <%= @bike.name %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
         <td><%= rental.cost %></td>

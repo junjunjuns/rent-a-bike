@@ -18,7 +18,7 @@
       <tr>
         <td><%= review.id %></td>
         <% @profile = Profile.find(review.profile_id) %>
-        <td><%= @profile.profile_picture %> <br>
+        <td><%= image_tag(@profile.avatar.url(:thumb)) %> <br>
         <%= @profile.fname + " " + @profile.lname %></td>
         <td><%= review.feedback %></td>
         <td><%= review.rating %></td>

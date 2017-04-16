@@ -15,7 +15,7 @@
     <% @profiles.each do |profile| %>
       <tr>
         <td><%= profile.user_id %></td>
-        <td><%= link_to profile.profile_picture, profile %><br>
+        <td><%= link_to image_tag(profile.avatar.url(:thumb)), profile %><br>
             <%= link_to profile.fname + " " + profile.lname, profile %></td>
         <td>Age: <%= profile.age %><br>
             Email: <%= profile.email %><br>

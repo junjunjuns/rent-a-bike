@@ -17,7 +17,7 @@
       <tr>
         <td><%= review.id %></td>
         <% @profile = Profile.find(review.profile_id) %>
-        <td><%= @profile.profile_picture %> <br>
+        <td><%= image_tag(@profile.avatar.url(:thumb)) %> <br>
             <%= @profile.fname + " " + @profile.lname %></td>
         <% @bike = Bike.find(review.bike_id) %>
         <td>Bike: <%= link_to @bike.name, "/bikes/#{review.bike_id}" %> <br><br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416085351) do
+ActiveRecord::Schema.define(version: 20170416150005) do
 
   create_table "bikes", force: :cascade do |t|
     t.string   "name"
@@ -19,9 +19,12 @@ ActiveRecord::Schema.define(version: 20170416085351) do
     t.string   "color"
     t.decimal  "price"
     t.string   "description"
-    t.string   "image"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -30,10 +33,13 @@ ActiveRecord::Schema.define(version: 20170416085351) do
     t.integer  "age"
     t.string   "email"
     t.string   "phone"
-    t.string   "profile_picture"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"

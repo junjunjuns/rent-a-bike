@@ -267,18 +267,3 @@ table td{
 	background: #D3DCF7;
 	overflow: hidden;
 }
-
-.leftTable{
-	display: block;
-	width: 25%;
-	height: auto;
-	margin: 1%;
-	float: left;	
-}
-.rightTable{
-	display: block;
-	width: 70%;
-	height: auto;
-	margin: 1%;
-	float: left;
-}

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<div class="leftTable">
-  <%= @bike.name %> <br>
-  <%= @bike.image %>
-</div>
 
-<div class="rightTable">
-  <p>
+<p>
+  <%= image_tag(@bike.image.url(:preview)) %> <br>
+  <strong>Bike:</strong>
+  <%= @bike.name %> <br>
+</p>
+
+<p>
   <strong>Manufacturer:</strong>
   <%= @bike.manufacturer %>
 </p>
@@ -26,7 +27,6 @@
   <%= @bike.description %>
 </p>
 
-</div>
 
 <div class="clearfix"></div>
 <%= link_to 'Edit', edit_bike_path(@bike) %> |

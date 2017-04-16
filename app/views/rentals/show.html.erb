@@ -3,10 +3,12 @@
 <h1>Rental made by <%= @profile.fname + " " + @profile.lname %></h1>
 
 <p>
-  <strong>Bike:</strong>
   <% @bike = Bike.find(@rental.bike_id) %>
+  <%= image_tag(@bike.image.url(:preview)) %> <br>
+  <strong>Bike:</strong>
   <%= @bike.name %>
-
+</p>
+  
 <p>
   <strong>Start date:</strong>
   <%= @rental.start_date %>

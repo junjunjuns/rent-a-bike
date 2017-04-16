@@ -21,7 +21,8 @@
       <tr>
         <td><%= rental.id %></td>
         <% @profile = Profile.find(rental.profile_id) %>
-        <td><%= link_to @profile.fname + " " + @profile.lname, "/profiles/#{rental.profile_id}" %></td>
+        <td><%= link_to image_tag(@profile.avatar.url(:thumb)), "/profiles/#{rental.profile_id}" %><br>
+            <%= link_to @profile.fname + " " + @profile.lname, "/profiles/#{rental.profile_id}" %></td>
         <% @bike = Bike.find(rental.bike_id) %>
         <td><%= @bike.name %></td>
         <td><%= rental.start_date %></td>
