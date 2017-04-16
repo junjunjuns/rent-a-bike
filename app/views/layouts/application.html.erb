@@ -50,7 +50,7 @@
   			  <li><a href="/allrentals">Rentals</a></li>
   			<% else %>
   			  <li><a href="/signedinuserprofile" >Profile</a></li>
-  			  <% @profile = current_user.id %>
+  			  <% @profile = ((current_user.id)+1) %>
   			  <li><%= link_to 'Rentals', profile_rentals_path(@profile) %></li>
 			  <% end %> 
 			<% end %>
@@ -76,7 +76,7 @@
     <h2>Make a Rental</h2>
 	   <% if user_signed_in? %> 
 	    <% if Profile.exists?(id: current_user.id) %>
-		    <% @profile = Profile.find(current_user.id) %>
+		    <% @profile = Profile.find((current_user.id)+1) %>
 		    <% @rental = @profile.rental.build %>
 		    <% @rental.profile_id = @profile.id %>
 		    <%= render :template => '/rentals/_form' %>
