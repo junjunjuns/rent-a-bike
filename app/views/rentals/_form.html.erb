@@ -25,6 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :bike_id %><br>
+	# @reference http://stackoverflow.com/questions/21503443/rails-select-tag-value-does-not-save-in-database
     <%= f.select :bike_id, options_from_collection_for_select(Bike.all, "id", "name") %>
   </div>
   <div class="field">
