@@ -75,15 +75,15 @@
   <div class="rightRental">
     <h2>Make a Rental</h2>
 	   <% if user_signed_in? %> 
-	    <% if Profile.where(current_user.id).nil? %>
+	    <% if Profile.exists?(id: current_user.id) %>
 		    <% @profile = Profile.find(current_user.id) %>
 		    <% @rental = @profile.rental.build %>
 		    <% @rental.profile_id = @profile.id %>
 		    <%= render :template => '/rentals/_form' %>
-		   <% else %>
+		  <% else %>
 		    <p>Please create a profile!</p>
-		   <% end %>
 		  <% end %>
+		 <% end %>
   </div>
 </div>
 		<footer>
