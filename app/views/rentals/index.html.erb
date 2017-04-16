@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Rentals</h1>
+<h1>Rentals made by <%= @profile.fname + " " + @profile.lname %></h1>
 
 <table>
   <thead>
@@ -18,16 +18,16 @@
   <tbody>
     <% @rentals.each do |rental| %>
       <tr>
-        <td><%= rental.profile_id %></td>
+        <td><%=  @profile.fname + " " + @profile.lname %></td>
         <% @bike = Bike.find(rental.bike_id) %>
         <td><%= @bike.name %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
         <td><%= rental.cost %></td>
         <td><%= rental.description %></td>
-        <td><%= link_to 'Show', rental %></td>
-        <td><%= link_to 'Edit', edit_rental_path(rental) %></td>
-        <td><%= link_to 'Destroy', rental, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', profile_rental_path(@profile, rental) %></td>
+        <td><%= link_to 'Edit', edit_profile_rental_path(@profile, rental) %></td>
+        <td><%= link_to 'Destroy', profile_rental_path(@profile, rental), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -35,4 +35,5 @@
 
 <br>
 
-<%= link_to 'New Rental', new_rental_path %>
+<%= link_to 'New Rental', new_profile_rental_path(@profile) %>
+<%= link_to 'Back to Bikes', "/bikes/" %>

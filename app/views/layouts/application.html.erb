@@ -25,13 +25,16 @@
   <nav id="myNav" class="nav">
 		<ul>
 			<li><a href="/bikes">Bikes</a></li>
-			<% if user_signed_in? && current_user.admin? %>
-			  <li><a href="/profiles">Profiles</a></li>
-			  <li><a href="/allrentals">Rentals</a></li>
-			<% else %>
-			  <li><a href="/signedinuserprofile" >Profile</a></li>
-			  <li><a href="/profiles/#{@profile.id}/rentals">Rentals</a></li>		
-			<% end %> 
+			<% if user_signed_in? %>
+			  <% if current_user.admin? %>
+  			  <li><a href="/profiles">Profiles</a></li>
+  			  <li><a href="/allrentals">Rentals</a></li>
+  			<% else %>
+  			  <li><a href="/signedinuserprofile" >Profile</a></li>
+  			  <li><%= link_to 'Rentals', profile_rentals_path(@profile) %></li>
+			  <% end %> 
+			<% end %>
+			  
 			<li><a href="/allreviews">Reviews</a></li>
 		</ul>
 	</nav>

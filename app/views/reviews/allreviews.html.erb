@@ -28,11 +28,6 @@
           <td><%= link_to 'Destroy', "bikes/#{review.bike_id}/reviews/#{review.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
-    <% end %>
+      <% end %>
   </tbody>
 </table>
-
-<br>
-<% @reviews.each do |review| %>
-<%= link_to 'New Review', "/bikes/#{review.bike_id}/reviews/new" %>
-<% end %>

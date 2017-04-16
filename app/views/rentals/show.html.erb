@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Rental made by <%= @profile.fname + " " + @profile.lname %></h1>
+
 <p>
   <strong>Profile:</strong>
-  <%= @rental.profile_id %>
+  <%= @profile.fname + " " + @profile.lname %>
 </p>
 
 <p>
@@ -30,5 +32,5 @@
   <%= @rental.description %>
 </p>
 
-<%= link_to 'Edit', edit_rental_path(@rental) %> |
-<%= link_to 'Back', rentals_path %>
+<%= link_to 'Edit', edit_profile_rental_path(@profile, @rental) %> |
+<%= link_to 'Back', profile_rentals_path(@profile) %>

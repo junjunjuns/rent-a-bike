@@ -8,10 +8,6 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :rentals
   end
-
-  resources :reviews
-
-  resources :rentals
   
   get 'signedinuserprofile' => 'profiles#signedinuserprofile'
   get 'allreviews' => 'reviews#allreviews'

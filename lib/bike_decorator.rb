@@ -1,8 +1,8 @@
 class BasicBike
-    def initialize(color)
-        @cost = 0
-        @color = color
-        @description = "basic bike"
+    def initialize(name, price, description)
+        @name = name
+        @cost = price
+        @description = description
     end
     
     # getter method
@@ -12,18 +12,14 @@ class BasicBike
     
     # a method which returns a string representation of the object of type BasicCar
     def details
-        return @description + "; " + @color + ": " + "#{@cost}"
+        return @description + "; " + @name + ": " + "#{@cost}"
     end
     
     # getter method
-    def color
-        return @color
+    def name
+        return @name
     end
     
-    # getter method
-    def model 
-        return @model
-    end
 end
 
 class BikeDecorator < BasicBike

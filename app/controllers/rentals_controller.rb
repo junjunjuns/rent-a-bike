@@ -3,39 +3,38 @@ class RentalsController < ApplicationController
   require 'rental_calculator'
   before_action :set_rental, only: [:show, :edit, :update, :destroy]
 
-  # GET /rentals
-  # GET /rentals.json
+  # GET  /profiles/:profile_id/rentals
   def index
-    @rentals = Rental.all
+    @profile = Profile.find(params[:profile_id])
+    @rentals = @profile.rental
   end
 
-  # GET /rentals/1
-  # GET /rentals/1.json
+  # GET  /profiles/:profile_id/rentals/:id
   def show
+    @profile = Profile.find(params[:profile_id])
+    @rental = @profile.rental.find(params[:id])
   end
 
-  # GET /rentals/new
+  # GET  /profiles/:profile_id/rentals/new
   def new
-    @rental = Rental.new
+    @profile = Profile.find(params[:profile_id])
+    @rental = @profile.rental.build
     @rental.profile_id = current_user.id
-    
   end
 
-  # GET /rentals/1/edit
+  # GET /profiles/:profile_id/rentals/:id/edit
   def edit
-  
+    @profile = Profile.find(params[:profile_id])
+    @rental = @profile.rental.find(params[:id])
   end
 
-  # POST /rentals
-  # POST /rentals.json
+  # POST /profiles/:profile_id/rentals
   def create
-    @rental = Rental.new(rental_params)
-    
-    #@bike.name = params[:bike][:name]
-    #@bike.color = params[:bike][:color]
-    #@bike.manufacturer = params[:bike][:manufacturer]
-    
-    myBike = BasicBike.new("blue")
+    @profile = Profile.find(params[:rental][:profile_id])
+    @rental = @profile.rental.build(params.require(:rental).permit!)
+    @bike = Bike.find(@rental.bike_id)
+
+    myBike = BasicBike.new(@bike.name, @bike.price, @bike.description)
     myCalculator = RentalCalculator.new(@rental.start_date, @rental.end_date)
     
     if params[:bike][:bag].to_s.length > 0 then
@@ -77,38 +76,78 @@ class RentalsController < ApplicationController
     @rental.cost = myBike.cost + myCalculator.calculate
     @rental.description = myBike.details
     
-    respond_to do |format|
-      if @rental.save
-        format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
-        format.json { render :show, status: :created, location: @rental }
-      else
-        format.html { render :new }
-        format.json { render json: @rental.errors, status: :unprocessable_entity }
-      end
+    if @rental.save
+      redirect_to profile_rental_url(@profile, @rental)
+    else
+      render :action => "new"
     end
   end
 
-  # PATCH/PUT /rentals/1
-  # PATCH/PUT /rentals/1.json
+  # PATCH/PUT /profiles/:profile_id/rentals/:id
   def update
-    respond_to do |format|
-      if @rental.update(rental_params)
-        format.html { redirect_to @rental, notice: 'Rental was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rental }
-      else
-        format.html { render :edit }
-        format.json { render json: @rental.errors, status: :unprocessable_entity }
-      end
+    @profile = Profile.find(params[:rental][:profile_id])
+    @rental = Rental.find(params[:id])
+    
+    @bike = Bike.find(@rental.bike_id)
+
+    myBike = BasicBike.new(@bike.name, @bike.price, @bike.description)
+    myCalculator = RentalCalculator.new(@rental.start_date, @rental.end_date)
+    
+    if params[:bike][:bag].to_s.length > 0 then
+      myBike = SaddleBagDecorator.new(myBike)
+    end
+
+    if params[:bike][:stabiliser].to_s.length > 0 then
+      myBike = StabiliserDecorator.new(myBike)
+    end
+
+    if params[:bike][:buggy].to_s.length > 0 then
+      myBike = ChildBuggyDecorator.new(myBike)
+    end
+
+    if params[:bike][:seat].to_s.length > 0 then
+      myBike = ChildSeatDecorator.new(myBike)
+    end
+  
+    if params[:bike][:waterBag].to_s.length > 0 then
+      myBike = WaterResistantBagDecorator.new(myBike)
+    end
+
+    if params[:bike][:eyeMirror].to_s.length > 0 then
+      myBike = EyeMirrorDecorator.new(myBike)
+    end
+
+    if params[:bike][:bell].to_s.length > 0 then
+      myBike = BellDecorator.new(myBike)
+    end
+
+    if params[:bike][:endMirror].to_s.length > 0 then
+      myBike = EndMirrorDecorator.new(myBike)
+    end
+
+    if params[:bike][:horn].to_s.length > 0 then
+      myBike = HornDecorator.new(myBike)
+    end
+    
+    @rental.cost = myBike.cost + myCalculator.calculate
+    @rental.description = myBike.details
+    
+    if @rental.update_attributes(params.require(:rental).permit!)
+      redirect_to profile_rental_url(@profile, @rental)
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /rentals/1
-  # DELETE /rentals/1.json
+  # DELETE  /profiles/:profile_id/rentals/:id
   def destroy
+    @profile = Profile.find(params[:profile_id])
+    @rental = Rental.find(params[:id])
     @rental.destroy
+    
     respond_to do |format|
-      format.html { redirect_to rentals_url, notice: 'Rental was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to profile_rentals_path(@profile) }
+      format.xml { head :ok }
     end
   end
   
